@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Maze Ventures Limited | Real Estate Developer in Dhaka</title>
+<script>document.documentElement.className+=' js'</script>
 <meta name="description" content="Maze Ventures Limited develops residential and commercial properties in Dhaka. Shaping the horizon.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Maze Ventures Limited | Real Estate Developer in Dhaka">
@@ -124,6 +125,14 @@ nav ul{flex-direction:column;gap:1rem}
 .btn.ghost{margin:.6rem 0 0}
 .split a{padding:3.5rem 6%}
 }
+/* red block reveal on headings */
+html.js .rv{position:relative;overflow:hidden;width:fit-content;max-width:100%;padding-bottom:.08em}
+html.js .rv::after{content:"";position:absolute;inset:0;background:var(--red);transform:translateX(0);transition:transform .95s cubic-bezier(.77,0,.18,1);will-change:transform}
+html.js .rv.in::after{transform:translateX(101%)}
+html.js .rv:not(.in)::after{transition:none}
+html.js .split a+a .rv::after{background:#fff}
+@media(prefers-reduced-motion:reduce){html.js .rv::after{display:none}}
+
 </style>
 </head>
 <body>
@@ -290,6 +299,13 @@ nav ul{flex-direction:column;gap:1rem}
 const b=document.getElementById('menu'),n=document.getElementById('nav');
 b.addEventListener('click',()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)});
 n.addEventListener('click',e=>{if(e.target.tagName==='A'){n.classList.remove('open');b.setAttribute('aria-expanded','false')}});
+
+const heads=document.querySelectorAll('h2');
+heads.forEach(h=>h.classList.add('rv'));
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio>=.6){e.target.classList.add('in')}else if(e.intersectionRatio===0){e.target.classList.remove('in')}}),{threshold:[0,.6],rootMargin:'0px 0px -6% 0px'});
+  heads.forEach(h=>io.observe(h));
+}else{heads.forEach(h=>h.classList.add('in'))}
 </script>
 </body>
 </html>

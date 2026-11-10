@@ -102,33 +102,53 @@ nav a:hover{color:#fff;text-decoration:underline;text-decoration-color:var(--red
 html.js .card{cursor:pointer}
 html.js .card .body{display:none}
 html:has(dialog[open]){overflow:hidden}
-#pd{border:0;padding:0;margin:auto;width:min(520px,92vw);max-height:90vh;overflow:auto;background:rgba(255,255,255,.97);color:var(--ink);box-shadow:0 24px 70px rgba(20,20,26,.28);opacity:0;transform:translateY(14px) scale(.985);transition:opacity .35s ease,transform .35s ease,overlay .35s allow-discrete,display .35s allow-discrete}
+#pd{border:0;padding:0;margin:auto;width:96vw;height:94vh;height:94dvh;max-width:none;max-height:none;overflow:hidden;background:#222;color:#fff;box-shadow:0 24px 70px rgba(20,20,26,.35);opacity:0;transform:translateY(14px) scale(.985);transition:opacity .35s ease,transform .35s ease,overlay .35s allow-discrete,display .35s allow-discrete}
 #pd[open]{opacity:1;transform:none}
 @starting-style{#pd[open]{opacity:0;transform:translateY(14px) scale(.985)}}
 #pd::backdrop{background:rgba(26,26,30,0);-webkit-backdrop-filter:blur(0);backdrop-filter:blur(0);transition:background .35s ease,backdrop-filter .35s ease,overlay .35s allow-discrete,display .35s allow-discrete}
 #pd[open]::backdrop{background:rgba(26,26,30,.45);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 @starting-style{#pd[open]::backdrop{background:rgba(26,26,30,0);backdrop-filter:blur(0)}}
-.pd-slider{position:relative;aspect-ratio:16/9;overflow:hidden;background:#6b6c72}
 .pd-track{display:flex;height:100%;transition:transform .55s cubic-bezier(.45,0,.2,1)}
 .pd-s{flex:0 0 100%;background-size:cover;background-position:center}
 .pd-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:var(--char);font-size:1.5rem;line-height:1;padding-bottom:3px;cursor:pointer}
 .pd-nav:hover{background:#fff}
 .pd-prev{left:.7rem}.pd-next{right:.7rem}
-.pd-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 1.8rem;border-bottom:1px solid rgba(0,0,0,.07)}
-.pd-capt{font-size:.88rem;color:var(--mute);font-style:italic}
 .pd-dots{display:flex;gap:.55rem;flex-shrink:0}
 .pd-dots button{position:relative;width:7px;height:7px;border-radius:50%;border:0;padding:0;background:#c9c9ce;cursor:pointer;transition:background .3s}
 .pd-dots button::after{content:"";position:absolute;inset:-9px}
 .pd-dots button.on{background:var(--red)}
 #pd.single .pd-nav,#pd.single .pd-dots{display:none}
-.pd-body{padding:1.6rem 1.8rem 2rem}
-.pd-tag{display:inline-block;font-size:.78rem;letter-spacing:.04em;color:var(--red);border:1px solid rgba(184,38,45,.4);padding:.1rem .65rem;margin-bottom:.9rem}
-#pd h3{font-size:1.5rem}
-.pd-loc{color:var(--mute);font-size:.95rem;margin:.2rem 0 1rem}
-.pd-desc{line-height:1.75;max-width:none}
 .pd-x{position:absolute;top:.7rem;right:.8rem;z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.88);color:var(--char);font-size:1.4rem;line-height:1;cursor:pointer}
 .pd-x:hover{background:#fff}
 @media(prefers-reduced-motion:reduce){#pd,#pd::backdrop,.pd-track{transition:none}}
+
+/* popup: full-screen photo with hover title and click-to-open details */
+.pd-slider{position:absolute;inset:0;overflow:hidden;background:#3a3b40}
+#pd .pd-nav{z-index:2}
+.pd-over{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:7rem clamp(1.2rem,4vw,3rem) 4.2rem;background:linear-gradient(to top,rgba(20,20,24,.82),rgba(20,20,24,0));color:#fff;transition:opacity .4s ease}
+.pd-over>*{transition:transform .45s ease}
+.pd-over h3{font-size:clamp(1.6rem,3.2vw,2.6rem)}
+.pd-loc{opacity:.85;margin:.3rem 0 1rem;font-size:1rem}
+.pd-more,.pd-less{background:none;border:0;border-bottom:1px solid rgba(255,255,255,.75);color:#fff;font:500 .95rem var(--body);padding:0 0 2px;cursor:pointer}
+@media(hover:hover){
+  .pd-over{opacity:0;pointer-events:none}
+  .pd-over>*{transform:translateY(18px)}
+  .pd-slider:hover .pd-over,.pd-over:focus-within{opacity:1;pointer-events:auto}
+  .pd-slider:hover .pd-over>*,.pd-over:focus-within>*{transform:none}
+}
+.pd-bar{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem clamp(1.2rem,4vw,3rem);background:linear-gradient(to top,rgba(20,20,24,.5),rgba(20,20,24,0));pointer-events:none;transition:opacity .3s ease}
+.pd-bar>*{pointer-events:auto}
+.pd-capt{font-size:.9rem;color:rgba(255,255,255,.9);font-style:italic}
+#pd .pd-dots button{background:rgba(255,255,255,.55);transition:width .3s,background .3s}
+#pd .pd-dots button.on{background:#fff;width:20px;border-radius:4px}
+.pd-info{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;padding:2rem 1.2rem;overflow:auto;background:rgba(20,20,24,.74);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s}
+.pd-info-in{max-width:640px;margin:auto;transform:translateY(14px);transition:transform .45s ease}
+.pd-info h3{font-size:clamp(1.7rem,3.4vw,2.6rem);margin-bottom:.2rem}
+.pd-desc{font-size:1.05rem;line-height:1.85;max-width:none;margin:0 0 1.6rem;color:rgba(255,255,255,.92)}
+#pd.info .pd-info{opacity:1;visibility:visible}
+#pd.info .pd-info-in{transform:none}
+#pd.info .pd-over,#pd.info .pd-bar,#pd.info .pd-nav{opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.pd-over,.pd-over>*,.pd-info,.pd-info-in,.pd-bar{transition:none}}
 
 /* landowner / buyer */
 .split{display:grid;grid-template-columns:1fr 1fr;padding:0}
@@ -343,13 +363,18 @@ html.js .split a+a .rv::after{background:#fff}
     <div class="pd-track"></div>
     <button class="pd-nav pd-prev" type="button" aria-label="Previous photo">&#8249;</button>
     <button class="pd-nav pd-next" type="button" aria-label="Next photo">&#8250;</button>
-  </div>
-  <div class="pd-bar"><span class="pd-capt"></span><span class="pd-dots"></span></div>
-  <div class="pd-body">
-    <span class="pd-tag"></span>
-    <h3 id="pd-title"></h3>
-    <div class="pd-loc"></div>
-    <p class="pd-desc"></p>
+    <div class="pd-over">
+      <h3 id="pd-title"></h3>
+      <div class="pd-loc"></div>
+      <button class="pd-more" type="button">View details</button>
+    </div>
+    <div class="pd-bar"><span class="pd-capt"></span><span class="pd-dots"></span></div>
+    <div class="pd-info"><div class="pd-info-in">
+      <h3 class="pd-info-title"></h3>
+      <div class="pd-loc pd-loc2"></div>
+      <p class="pd-desc"></p>
+      <button class="pd-less" type="button">Hide details</button>
+    </div></div>
   </div>
 </dialog>
 
@@ -367,11 +392,11 @@ if('IntersectionObserver' in window){
 
 const pd=document.getElementById('pd'),track=pd.querySelector('.pd-track'),dots=pd.querySelector('.pd-dots'),capt=pd.querySelector('.pd-capt');
 const LOREM=['Lorem ipsum dolor sit amet, consectetur adipiscing elit.','Sed do eiusmod tempor incididunt ut labore et dolore.','Ut enim ad minim veniam, quis nostrud exercitation.','Duis aute irure dolor in reprehenderit in voluptate.'];
-/* extra photos per project: replace these files in images/projects, or add more paths */
+/* photos per project: replace these files in images/projects, or add more paths */
 const GALLERY={
-  ongoing:['images/projects/ongoing-2.jpg','images/projects/ongoing-3.jpg','images/projects/ongoing-4.jpg'],
-  upcoming:['images/projects/upcoming-2.jpg','images/projects/upcoming-3.jpg','images/projects/upcoming-4.jpg'],
-  ready:['images/projects/ready-2.jpg','images/projects/ready-3.jpg','images/projects/ready-4.jpg']
+  ongoing:['images/projects/ongoing-1.jpg','images/projects/ongoing-2.jpg','images/projects/ongoing-3.jpg','images/projects/ongoing-4.jpg'],
+  upcoming:['images/projects/upcoming-1.jpg','images/projects/upcoming-2.jpg','images/projects/upcoming-3.jpg','images/projects/upcoming-4.jpg'],
+  ready:['images/projects/ready-1.jpg','images/projects/ready-2.jpg','images/projects/ready-3.jpg','images/projects/ready-4.jpg']
 };
 let idx=0,slides=[];
 function go(i){
@@ -380,10 +405,10 @@ function go(i){
   capt.textContent=slides[idx].cap;
   [...dots.children].forEach((d,k)=>{d.classList.toggle('on',k===idx);d.setAttribute('aria-current',k===idx)});
 }
-function build(c,pic){
-  const key=c.querySelector('.tag').textContent.trim().toLowerCase();
-  slides=[{bg:pic.style.backgroundImage,pos:pic.style.backgroundPosition,cap:LOREM[0]}]
-    .concat((GALLERY[key]||[]).map((g,k)=>({bg:'url('+g+')',pos:'center',cap:LOREM[(k+1)%LOREM.length]})));
+function build(key,pic){
+  const list=GALLERY[key];
+  slides=list?list.map((g,k)=>({bg:k===0?'url('+g+'),'+pic.style.backgroundImage:'url('+g+')',pos:k===0?(pic.style.backgroundPosition||'center'):'center',cap:LOREM[k%LOREM.length]}))
+             :[{bg:pic.style.backgroundImage,pos:pic.style.backgroundPosition,cap:LOREM[0]}];
   track.innerHTML='';dots.innerHTML='';
   slides.forEach((s,k)=>{
     const d=document.createElement('div');d.className='pd-s';d.style.backgroundImage=s.bg;d.style.backgroundPosition=s.pos;track.appendChild(d);
@@ -397,11 +422,14 @@ document.querySelectorAll('.card').forEach(c=>{
   const pic=c.querySelector('.pic');
   pic.setAttribute('role','button');pic.setAttribute('aria-haspopup','dialog');
   const open=()=>{
-    build(c,pic);
-    pd.querySelector('.pd-tag').textContent=c.querySelector('.tag').textContent;
-    pd.querySelector('#pd-title').textContent=c.querySelector('h3').textContent;
-    pd.querySelector('.pd-loc').textContent=c.querySelector('.loc').textContent;
+    const name=c.querySelector('h3').textContent,loc=c.querySelector('.loc').textContent;
+    build(c.querySelector('.tag').textContent.trim().toLowerCase(),pic);
+    pd.querySelector('#pd-title').textContent=name;
+    pd.querySelector('.pd-over .pd-loc').textContent=loc;
+    pd.querySelector('.pd-info-title').textContent=name;
+    pd.querySelector('.pd-loc2').textContent=loc;
     pd.querySelector('.pd-desc').textContent=c.querySelector('.inner p').textContent;
+    pd.classList.remove('info');
     pd.showModal();
   };
   c.addEventListener('click',open);
@@ -413,7 +441,11 @@ pd.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(idx+1);if(e.key==='
 let sx=null;
 track.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
 track.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)go(idx+(dx<0?1:-1));sx=null});
+pd.querySelector('.pd-more').addEventListener('click',()=>pd.classList.add('info'));
+pd.querySelector('.pd-less').addEventListener('click',()=>pd.classList.remove('info'));
+pd.querySelector('.pd-info').addEventListener('click',e=>{if(e.target===e.currentTarget)pd.classList.remove('info')});
 pd.querySelector('.pd-x').addEventListener('click',()=>pd.close());
+pd.addEventListener('close',()=>pd.classList.remove('info'));
 pd.addEventListener('click',e=>{if(e.target===pd)pd.close()});
 </script>
 </body>

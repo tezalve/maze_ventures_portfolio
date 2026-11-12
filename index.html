@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Maze Ventures Limited | Real Estate Developer in Dhaka</title>
 <script>document.documentElement.className+=' js'</script>
-<script>(function(){var d=document.documentElement,L=null;try{L=localStorage.getItem('lang')}catch(e){}if(L!=='bn'&&L!=='en')L=null;d.lang=L||'en';if(!L)d.className+=' gate';else if(L==='bn'){d.className+=' pending';setTimeout(function(){d.classList.remove('pending')},2000)}})()</script>
+<script>(function(){var d=document.documentElement,L=null;try{L=localStorage.getItem('lang')}catch(e){}if(L!=='bn'&&L!=='en')L=null;d.lang=L||'en';if(L==='bn'){d.className+=' pending';setTimeout(function(){d.classList.remove('pending')},2000)}})()</script>
 <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <meta name="description" content="Maze Ventures Limited develops residential and commercial properties in Dhaka. Shaping the horizon.">
 <meta property="og:type" content="website">
@@ -223,20 +223,7 @@ html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3{line-height:1.35;letter
 html[lang="bn"] .hero h1{max-width:15ch}
 html[lang="bn"] body{line-height:1.8}
 html.pending body{visibility:hidden}
-html.gate{overflow:hidden}
-#lang-gate{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;color:#fff;background:linear-gradient(160deg,#3a3a3e,#1a1a1c 70%);transition:opacity .5s ease,visibility .5s}
-html.gate #lang-gate{display:flex}
-#lang-gate.out{opacity:0;visibility:hidden}
-.gate-mk{height:92px;width:auto;margin-bottom:1.4rem}
-.gate-wm{height:56px;width:auto}
-.gate-line{width:70px;height:2px;background:var(--red);margin:1.8rem auto 1.4rem}
-.gate-q{color:#cfcfd6;margin:0 auto 1.6rem;line-height:1.9}
-.gate-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-.gate-btns button{min-width:150px;padding:.95rem 1.6rem;font:500 1.05rem var(--body);color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.4);cursor:pointer;transition:background .3s,border-color .3s}
-.gate-btns button[data-l="bn"]{font-family:"Noto Sans Bengali",var(--body)}
-.gate-btns button:hover{background:var(--red);border-color:var(--red)}
 @media(max-width:860px){.navr{gap:.6rem}}
-@media(prefers-reduced-motion:reduce){#lang-gate{transition:none}}
 
 /* dark / light switch */
 .theme{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:none;border:1px solid rgba(255,255,255,.28);color:#e4e4e8;cursor:pointer;opacity:.85;transition:opacity .2s,border-color .2s}
@@ -259,16 +246,13 @@ html[data-theme="dark"] footer::before{background-image:url(data:image/svg+xml;b
 html.theme-anim body,html.theme-anim section,html.theme-anim .card,html.theme-anim footer,html.theme-anim input,html.theme-anim select,html.theme-anim textarea,html.theme-anim .mono{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
 @media(max-width:860px){.navr{gap:.5rem}}
 
+/* preselected role highlight */
+@keyframes pick{0%{box-shadow:0 0 0 0 rgba(184,38,45,.55)}100%{box-shadow:0 0 0 10px rgba(184,38,45,0)}}
+select.flash{animation:pick 1.2s ease .5s 2}
+@media(prefers-reduced-motion:reduce){select.flash{animation:none}}
 </style>
 </head>
 <body>
-<div id="lang-gate" role="dialog" aria-modal="true" aria-label="Choose your language / ভাষা নির্বাচন করুন">
-  <img class="gate-mk" alt="">
-  <img class="gate-wm" alt="Maze Ventures Limited">
-  <div class="gate-line"></div>
-  <p class="gate-q">Choose your language<br><span lang="bn">ভাষা নির্বাচন করুন</span></p>
-  <div class="gate-btns"><button type="button" data-l="en">English</button><button type="button" data-l="bn" lang="bn">বাংলা</button></div>
-</div>
 
 <header>
   <div class="wrap nav">
@@ -378,12 +362,12 @@ html.theme-anim body,html.theme-anim section,html.theme-anim .card,html.theme-an
 </section>
 
 <section class="split" id="partner">
-  <a href="#contact">
+  <a href="#contact" data-role="Landowner">
     <h2>Own land in Dhaka?</h2>
     <p>Develop it with us through a transparent joint venture agreement.</p>
     <span>Contact us as a landowner</span>
   </a>
-  <a href="#contact">
+  <a href="#contact" data-role="Buyer">
     <h2>Looking for a home or investment?</h2>
     <p>Tell us your budget and preferred area, and we will share suitable options.</p>
     <span>Contact us as a buyer</span>
@@ -542,18 +526,9 @@ pd.addEventListener('click',e=>{if(e.target===pd)pd.close()});
     if(save){try{localStorage.setItem('lang',l)}catch(e){}}
   }
   btns.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.l,true)));
-  const root=document.documentElement,gate=document.getElementById('lang-gate');
-  const gimgs=gate.querySelectorAll('img');
-  gimgs[0].src=document.querySelector('.logo .mk').src;
-  gimgs[1].src=document.querySelector('.logo .wm').src;
-  gate.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
-    setLang(b.dataset.l,true);
-    gate.classList.add('out');
-    setTimeout(()=>{root.classList.remove('gate');gate.classList.remove('out')},500);
-  }));
+  const root=document.documentElement;
   setLang(root.lang==='bn'?'bn':'en',false);
   root.classList.remove('pending');
-  if(root.classList.contains('gate'))gate.querySelector('button').focus();
 })();
 
 (function(){
@@ -572,6 +547,13 @@ pd.addEventListener('click',e=>{if(e.target===pd)pd.close()});
   });
   updateThemeLabel();
 })();
+
+document.querySelectorAll('[data-role]').forEach(a=>a.addEventListener('click',()=>{
+  const sel=document.querySelector('select[name="interest"]');
+  if(!sel)return;
+  sel.value=a.dataset.role;
+  sel.classList.remove('flash');void sel.offsetWidth;sel.classList.add('flash');
+}));
 </script>
 </body>
 </html>

@@ -250,6 +250,9 @@ html.theme-anim body,html.theme-anim section,html.theme-anim .card,html.theme-an
 @keyframes pick{0%{box-shadow:0 0 0 0 rgba(184,38,45,.55)}100%{box-shadow:0 0 0 10px rgba(184,38,45,0)}}
 select.flash{animation:pick 1.2s ease .5s 2}
 @media(prefers-reduced-motion:reduce){select.flash{animation:none}}
+/* small red sun above the footer skyline */
+footer::before{z-index:1}
+footer::after{content:"";position:absolute;z-index:0;left:calc(50% + 10px);transform:translateX(-50%);bottom:calc(100% + clamp(32px,4.6vw,60px) - 10px);width:clamp(18px,2.4vw,32px);aspect-ratio:1;border-radius:50%;background:var(--red);box-shadow:0 0 18px 4px rgba(184,38,45,.6),0 0 50px 16px rgba(184,38,45,.32);pointer-events:none}
 </style>
 </head>
 <body>

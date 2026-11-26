@@ -285,6 +285,9 @@ html.js .fu:not(.in){transition:none}
 @media(prefers-reduced-motion:reduce){html.js .fu{opacity:1;transform:none;transition:none}}
 @media(max-width:860px){.btn.ghost{margin-left:0}}
 
+/* hero illustration */
+.hero::before{content:"";position:absolute;inset:0;background:url(images/hero-sketch.webp) no-repeat center bottom/100% auto;opacity:.34;pointer-events:none}
+@media(max-width:860px){.hero::before{background-size:auto 58%;opacity:.3}}
 </style>
 </head>
 <body>
@@ -313,7 +316,6 @@ html.js .fu:not(.in){transition:none}
 
 <main id="top">
 <section class="hero">
-  <img class="hero-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NzAuMCA5NjAuNyI+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIwLjEiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE3Mi43IDM4Mi4wIEw0LjcgNDk1LjAgTDIuMCA0OTguNyBMMi4wIDk1OC43IEw0LjcgOTU4LjAgTDE3LjMgOTQ4LjcgTDE3MC4wIDg0OS4wIEwxNzIuNyA4NDUuM1pNNTkyLjMgMzgxLjMgTDU5Mi4zIDg0Mi43IEw1OTMuMyA4NDUuMCBMNTk3LjAgODQ4LjAgTDY2Ny4wIDg5Mi43IEw3NjMuMyA5NTcuMCBMNzY3LjAgOTU4LjMgTDc2OC4wIDk1Ni4zIEw3NjcuMyA0OTguMCBMNzYzLjAgNDkzLjMgTDYxMS43IDM5Mi4wIEw1OTUuNyAzODIuM1pNNTUzLjMgMi4wIEw0MzkuMCA4MC4zIEwyODkuMyAxODYuNyBMMjgzLjMgMTkyLjcgTDI4Mi43IDIwMi4zIEwyODMuNyAyOTIuNyBMMjg3LjcgMjkxLjAgTDM5MS43IDIyMC43IEwzOTkuMCAyMTYuNyBMNDAxLjcgMjE3LjcgTDQwMi4wIDcyOC4wIEw0MDQuNyA3MzAuNyBMNTU0LjAgODI3LjAgTDU1NS4wIDMuMFoiLz48cGF0aCBmaWxsPSIjQjgyNjJEIiBmaWxsLW9wYWNpdHk9IjAuOTUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTM2Ny4wIDI2MC43IEwzNTYuNyAyNjYuMyBMMjE1LjMgMzYwLjcgTDIxMC4wIDM2NS4zIEwyMDkuMyAzNjcuMyBMMjA5LjMgODI1LjMgTDIxMC4zIDgyNi43IEwzNjMuMCA3MzQuMyBMMzY4LjAgNzMwLjAgTDM2OC4wIDI2My4zWiIvPjwvc3ZnPg==" alt="">
   <div class="wrap">
     <h1>Shaping the horizon.</h1>
     <p>Maze Ventures Limited develops residential and commercial properties in Dhaka, with careful design and honest dealings from first plan to handover.</p>

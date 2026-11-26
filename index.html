@@ -312,6 +312,35 @@ footer a:hover{color:var(--ink)}
 .fcol address{font-style:normal;line-height:1.9}
 .fcol address b{color:var(--ink);font-weight:500}
 @media(max-width:860px){footer .fgrid{grid-template-columns:1fr;gap:2.2rem;padding:3.5rem 0 2.2rem}}
+/* header: no collisions on small and medium screens */
+.logo{min-width:0}
+.logo img{max-width:none;flex-shrink:0}
+.navr{flex-shrink:0}
+@media(min-width:1181px) and (max-width:1360px){nav ul{gap:1.4rem}}
+@media(max-width:1180px){
+  #menu{display:block;padding:.2rem .35rem}
+  nav{position:absolute;top:70px;left:0;right:0;background:var(--deep);display:none;padding:1rem 4%}
+  nav.open{display:block}
+  nav ul{flex-direction:column;gap:1rem}
+  .navr{gap:.6rem}
+}
+@media(max-width:480px){
+  .nav.wrap{width:94%;gap:.5rem}
+  .logo{gap:.6rem}
+  .logo .mk{height:34px}
+  .logo .wm{height:26px}
+  .lang button{padding:.3rem .4rem;font-size:.78rem}
+  .theme{width:32px;height:32px}
+  .theme svg{width:16px;height:16px}
+  .navr{gap:.25rem}
+  #menu{padding:.2rem .3rem;font-size:1.45rem}
+}
+@media(max-width:360px){
+  .logo{gap:.5rem}
+  .logo .mk{height:30px}
+  .logo .wm{height:22px}
+  .lang button{padding:.3rem .28rem}
+}
 </style>
 </head>
 <body>

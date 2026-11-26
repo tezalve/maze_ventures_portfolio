@@ -288,6 +288,15 @@ html.js .fu:not(.in){transition:none}
 /* hero illustration */
 .hero::before{content:"";position:absolute;inset:0;background:url(images/hero-sketch.webp) no-repeat center bottom/100% auto;opacity:.34;pointer-events:none}
 @media(max-width:860px){.hero::before{background-size:auto 58%;opacity:.3}}
+/* hero: light mode and readable text */
+.hero::before{-webkit-mask-image:radial-gradient(ellipse 58% 62% at 26% 44%,rgba(0,0,0,.04) 0%,rgba(0,0,0,.1) 45%,#000 100%);mask-image:radial-gradient(ellipse 58% 62% at 26% 44%,rgba(0,0,0,.04) 0%,rgba(0,0,0,.1) 45%,#000 100%)}
+@media(max-width:860px){.hero::before{-webkit-mask-image:radial-gradient(ellipse 100% 48% at 40% 36%,rgba(0,0,0,.04) 0%,rgba(0,0,0,.1) 50%,#000 100%);mask-image:radial-gradient(ellipse 100% 48% at 40% 36%,rgba(0,0,0,.04) 0%,rgba(0,0,0,.1) 50%,#000 100%)}}
+html:not([data-theme="dark"]) .hero{background:linear-gradient(180deg,#ffffff 0%,var(--stone) 100%);color:var(--ink)}
+html:not([data-theme="dark"]) .hero::before{filter:invert(1);opacity:.45}
+html:not([data-theme="dark"]) .hero p{color:var(--mute)}
+html:not([data-theme="dark"]) .hero .btn{color:var(--ink);border-color:rgba(29,29,33,.7)}
+html:not([data-theme="dark"]) .hero .btn.ghost{border-color:rgba(29,29,33,.3)}
+html:not([data-theme="dark"]) .hero .btn:hover,html:not([data-theme="dark"]) .hero .btn.ghost:hover{background:var(--ink);border-color:var(--ink);color:#fff}
 </style>
 </head>
 <body>
